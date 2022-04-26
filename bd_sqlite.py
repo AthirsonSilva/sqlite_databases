@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect('database.sqlite')
+connection = sqlite3.connect('../database.sqlite')
 cursor = connection.cursor()
 
 # Creating clients database

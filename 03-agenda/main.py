@@ -7,28 +7,28 @@ class AgendaDB:
         self.cursor = self.conn.cursor()
 
     def inserir(self, nome, telefone):
-        consulta = 'INSERT OR IGNORE INTO agenda (nome, telefone) VALUES (?, ?)'
+        consulta = 'INSERT OR IGNORE INTO Noun (nome, telefone) VALUES (?, ?)'
         self.cursor.execute(consulta, (nome, telefone))
         self.conn.commit()
 
     def editar(self, nome, telefone, id):
-        consulta = 'UPDATE OR IGNORE agenda SET nome=?, telefone=? WHERE id=?'
+        consulta = 'UPDATE OR IGNORE Noun SET nome=?, telefone=? WHERE id=?'
         self.cursor.execute(consulta, (nome, telefone, id))
         self.conn.commit()
 
     def excluir(self, id):
-        consulta = 'DELETE FROM agenda WHERE id=?'
+        consulta = 'DELETE FROM Noun WHERE id=?'
         self.cursor.execute(consulta, (id,))
         self.conn.commit()
 
     def listar(self):
-        self.cursor.execute('SELECT * FROM agenda')
+        self.cursor.execute('SELECT * FROM Noun')
 
         for linha in self.cursor.fetchall():
             print(linha)
 
     def buscar(self, valor):
-        consulta = 'SELECT * FROM agenda WHERE nome LIKE ?'
+        consulta = 'SELECT * FROM Noun WHERE nome LIKE ?'
         self.cursor.execute(consulta, (f'%{valor}%',))
 
         for linha in self.cursor.fetchall():
@@ -40,5 +40,5 @@ class AgendaDB:
 
 
 if __name__ == '__main__':
-    agenda = AgendaDB('agenda.db')
+    agenda = AgendaDB('./database.sqlite')
     agenda.buscar('luiz')
